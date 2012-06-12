@@ -1,0 +1,14 @@
+fuQuery - fuq for short.
+=======================
+
+What the fuq is it?
+-------------------
+
+fuQuery is a tiny Javascript library which is still under development. I was working on some tiny html that required a few things from jQuery, but I didn't want to load the whole thing everytime, plus I was bored. Hence, fuQuery was born.
+I am by no means a Javascript developer, in fact I'm a Perl developer. So this library probably sucks more than its name, but hopefully someone will find it useful.
+
+Where the fuq is it going?
+--------------------------
+Well, I've only just started it. I didn't want to add too much to it as I wanted to keep fuq as simplistic as possible, while still making it actually helpful. Ideas/comments/contributions/naked pictures are always welcome.
+
+- Brad
