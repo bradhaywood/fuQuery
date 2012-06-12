@@ -1,0 +1,48 @@
+<html>
+    <head>
+        <title>Test Page</title>
+        <script type="text/javascript" src="fuq.min.js"></script>
+    </head>
+    <body>
+        <div id="test-tag"><h1>Hello, World, Click me!</h1></div>
+        <p class="p">Wassup mate</p>
+        <p class="p">Another p class</p>
+        <a href="javascript:;" id="clickable">Click me :-)</a>
+        <div id="a-block">Hey there handsome ;-)</div>
+        
+        <script type="text/javascript">
+            // use ready(cb) to run Javascript once the document has loaded.
+            // should work in most browsers.
+            ready(function() {
+                var showing_block = 0;
+                // save elements into variables for easy accessing
+                var a_block = find({ id : 'a-block' });
+                // finding a class returns an array, no matter the size
+                // we can use first() and last() to retrieve the first and last 
+                // element from the array respectively.
+                // should you need a specific index, just use...
+                //     find({ class : 'name' })[4]
+                // to get the third element (They are zero-indexed, you see).
+                var p_class = find({ class : 'p' }).last();
+                a_block.hide();
+                find({ id : 'test-tag' }).click(function() {
+                    // the keyword 'this' returns the current object you're inside
+                    // so in this instance, it returns the 'test-tag' element.
+                    this.html("<h1>Changed :-D</h1>");
+                    p_class.html("Changed this, too!");
+                });
+
+                find({ id : 'clickable' }).click(function() {
+                    if (! showing_block) {
+                        a_block.show();
+                        showing_block = 1;
+                    }
+                    else {
+                        a_block.hide();
+                        showing_block = 0;
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>
