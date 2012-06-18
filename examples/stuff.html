@@ -4,24 +4,31 @@
         <script type="text/javascript" src="fuq.js"></script>
     </head>
     <body>
-        <div id="test-tag"><h1>Hello, World!</h1></div>
+        <div id="test-tag"><h1 id="heading">Hello, World!</h1></div>
         <p class="p">Wassup mate</p>
         <p class="p">Another p class</p>
         <p class="p">Just <i>Another</i> paragraph. With some <i>Italics here</i></p>
         <a href="javascript:;" id="clickable">Click me :-)</a>
-        <div id="a-block">Hey there handsome ;-)</div>
-        
+        <a href="javascript:void(0)" id="head-red">Click to make heading red</a>
+        <div id="a-block">Hey there :-)</div>
+        <p><div id="counter"></div></p>
+        <p><input type="text" id="text" value=""> <button id="submit">Submit</button></p>
+        <p><div id="block"></div></p>
+        <p><a href="javascript:void(0);" id="button">Loopy</a></p>
+        <p><div id="offset"></div></p>
+        <div id="total-tags">Found a total of <script>print( $('.p').length );</script> 'p' classes and <script>print( $('p').length );</script> 'p' tags</div>
         <script type="text/javascript">
             ready(function() {
                 var showing_block = 0;
+                // use find() or $() to get elements
                 var a_block = find({ id : 'a-block' });
                 var p_class = find({ class : 'p' }).last();
                 a_block.hide();
-                find({ id : 'test-tag' }).click(function() {
-                    this.html("<h1>Changed :-D</h1>");
+                $('#test-tag').evt('dblclick', function() {
+                    $(this).html("<h1>Changed :-D</h1>");
                 });
 
-                find({ id : 'clickable' }).click(function() {
+                find({ id : 'clickable' }).evt('click', function() {
                     if (! showing_block) {
                         a_block.show();
                         showing_block = 1;
@@ -32,12 +39,38 @@
                     }
                 });
 
-                // chainging .tags() onto a find() will search for specific tags (ie: p, i, h1)
+                // chaining .tags() onto a find() will search for specific tags (ie: p, i, h1)
                 // within that class or id element. It will return an array, so use indexes or first()/last()
                 // to retrieve the physical element
-                find({ class : 'p' }).tags('i').last().click(function() {
+                find({ class : 'p' }).tags('i').last().evt('click', function() {
                     alert('Last italics clicked');
                 });
+
+                $('#head-red').evt('click', function() {
+                    $('#heading').css({ color : 'red' });
+                });
+        
+                // text counter
+                var text = find({ id : 'text' });
+                $('#text').evt('keyup', function() {
+                    var c = $(this).val().length;
+                    if (c > 10) { return false; }
+                    $('#counter').html(c);
+                });
+
+                $('#button').evt('click', function() {
+                    var str;
+                    $('.p').each(function(val, index) {
+                        if (val.html() != 'undefined')
+                            $('#block').html(val.html() + "<br />", { write : 'append' });
+                    });
+                });
+
+                $('#button').evt('mouseover', function() {
+                    $(this).css({ 'font-weight': 'bold' });
+                });
+                $('#button').evt('mouseout', function() { this.css({ 'font-weight' : 'normal' }); });
+                $('#offset').html("#button is at " + $('#button').top() + " top position, and as left, is " + $('#button').left());
             });
         </script>
     </body>
