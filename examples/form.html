@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <title>Form test</title>
+        <script type="text/javascript" src="fuq.js"></script>
+    </head>
+    <body>
+        <p><select id="sel"><option value="option1">Option 1</option><option value="option2">Option 2</option></select></p>
+        Do you agree? <input type="checkbox" id="agree"><br />
+        <input type="submit" disabled="true" id="next">Next
+    
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('#agree').evt('click', function() {
+                    var n = $('#next');
+                    if ($(this).checked)
+                        n.attr('disabled', false);
+                    else
+                        n.attr('disabled', true);
+                });
+
+                $('#sel').evt('change', function() {
+                    alert("Changed to " + $(this).val());
+                });
+            });
+        </script>
+    </body>
+</html> 
